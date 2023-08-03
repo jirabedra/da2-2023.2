@@ -10,4 +10,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\ServiceFactory\ServiceFactory.csproj" />
+    <ProjectReference Include="..\WebModels\WebModels.csproj" />
+  </ItemGroup>
+
 </Project>

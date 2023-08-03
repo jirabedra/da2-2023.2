@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BusinessLogic;
+using LogicInterface.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MoviesApi.Models.In;
-using MoviesApi.Models.Out;
+using WebModels.Models.In;
+using WebModels.Models.Out;
 
 namespace MoviesApi.Controllers
 {
@@ -9,7 +11,11 @@ namespace MoviesApi.Controllers
     [ApiController]
     public class MoviesController : ControllerBase
     {
-
+        private IMovieLogic movieLogic;
+        public MoviesController(IMovieLogic movieLogic)
+        {
+            this.movieLogic = movieLogic;
+        }
         //Attribute para indicarle a ASP.NET Core que este método de acción 
         //corresponde a una solicitud HTTP con verbo Get
         [HttpGet]
@@ -17,31 +23,26 @@ namespace MoviesApi.Controllers
         //IActionResult es un tipo base para representar respuestas HTTP.
         public IActionResult GetMovieByPostfix([FromQuery] string? endsWith) // ?endsWith=2
         {
-            string[] movies = { "Shrek 2", "Harry Potter 2", "Barbie", "Oppenheimer" };
+            IEnumerable<GetMovieResponse> movies = movieLogic.GetMoviesByPostix(endsWith)
+                .Select(s => new GetMovieResponse(s));
             if(endsWith is null)
             {
-                return Ok(movies);
+                return Ok();
             }
-            return Ok(movies.Where(x => x.EndsWith(endsWith)).ToList());
+            return Ok(movies);
         }
 
         [HttpGet("{title}")]
         public IActionResult GetMovieByTitle([FromRoute] string title) // /Avatar
         {
-            string[] movies = { "Shrek 2", "Harry Potter 2", "Barbie", "Oppenheimer" };
-            return Ok(from movie in movies
-                      where movie.ToLower().Equals(title.ToLower())
-                      select movie);
+            GetMovieResponse movie = new GetMovieResponse(movieLogic.GetMovieByTitle(title));
+            return Ok(movie);
         }
 
         [HttpPost]
         public IActionResult CreateMovie([FromBody] CreateMovieRequest movie)
         {
-            CreateMovieResponse response = new CreateMovieResponse()
-            {
-                Title = movie.Title,
-                Genres = movie.Genres
-            };
+            CreateMovieResponse response = new CreateMovieResponse(movieLogic.CreateMovie(movie.ToEntity()));
             return CreatedAtAction(nameof(GetMovieByTitle), new { title = response.Title}, response);
         }
 
