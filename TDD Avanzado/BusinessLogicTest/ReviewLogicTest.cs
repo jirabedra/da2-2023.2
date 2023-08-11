@@ -1,7 +1,9 @@
 using BusinessLogic;
+using DataAccessInterface;
 using Domain;
 using IDataAccess.Interfaces;
 using LogicInterface;
+using LogicInterface.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -40,5 +42,6 @@ namespace BusinessLogicTest
             Assert.IsTrue(result.SequenceEqual(reviews));
         }
 
+       
     }
 }

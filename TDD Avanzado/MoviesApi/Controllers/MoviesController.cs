@@ -34,8 +34,14 @@ namespace MoviesApi.Controllers
         [HttpGet("{title}")]
         public IActionResult GetMovieByTitle([FromRoute] string title) // /Avatar
         {
-            GetMovieResponse movie = new GetMovieResponse(movieLogic.GetMovieByTitle(title));
-            return Ok(movie);
+            try
+            {
+                GetMovieResponse movie = new GetMovieResponse(movieLogic.GetMovieByTitle(title));
+                return Ok(movie);
+            } catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPost]

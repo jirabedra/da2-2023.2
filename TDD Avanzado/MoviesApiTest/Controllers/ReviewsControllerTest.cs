@@ -32,7 +32,7 @@ namespace MoviesApiTest.Controllers
                     Rating = 3.7
                 }
             };
-            Mock<IReviewLogic> reviewsLogicMock = new Mock<IReviewLogic>();
+            Mock<IReviewLogic> reviewsLogicMock = new Mock<IReviewLogic>(MockBehavior.Strict);
             reviewsLogicMock.Setup(logic => logic.GetAllReviews())
                 .Returns(reviews);
             _reviewsController = new ReviewsController(reviewsLogicMock.Object);
@@ -45,8 +45,11 @@ namespace MoviesApiTest.Controllers
             Console.WriteLine(result.Value);
             List<ReviewResponseModel> objectResult = result.Value as List<ReviewResponseModel>;
             //Assert
+            reviewsLogicMock.VerifyAll();
             Assert.IsTrue(result.StatusCode.Equals(expected.StatusCode)
                 && expectedObject.First().Movie.Title.Equals(objectResult.First().Movie.Title));
         }
+
+
     }
 }

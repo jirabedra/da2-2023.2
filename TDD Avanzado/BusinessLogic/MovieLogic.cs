@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using DataAccessInterface;
+using Domain;
 using LogicInterface;
 using LogicInterface.Interfaces;
 
@@ -6,6 +7,13 @@ namespace BusinessLogic
 {
     public class MovieLogic : IMovieLogic
     {
+        private IMovieRepository _movieRepository;
+
+        public MovieLogic(IMovieRepository movieRepository)
+        {
+            _movieRepository = movieRepository;
+        }
+
         public Movie CreateMovie(Movie movie)
         {
             Console.WriteLine("Creating movie!");
@@ -14,11 +22,7 @@ namespace BusinessLogic
 
         public Movie GetMovieByTitle(string title)
         {
-            return new Movie()
-            {
-               Title = title,
-               Genres = new List<string>()
-            };
+            return _movieRepository.GetMovieByTitle(title); 
         }
 
         public IEnumerable<Movie> GetMoviesByPostix(string postfix)

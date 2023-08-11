@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceFactory", "ServiceFa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoviesApiTest", "MoviesApiTest\MoviesApiTest.csproj", "{DF23FE25-70E7-448F-BF83-88DDEBFADE51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDataAccess", "IDataAccess\IDataAccess.csproj", "{F9A87A4C-28E1-4E29-99D9-6CE23FB89D44}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessInterface", "IDataAccess\DataAccessInterface.csproj", "{F9A87A4C-28E1-4E29-99D9-6CE23FB89D44}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessTest", "DataAccessTest\DataAccessTest.csproj", "{73C2F39C-FC6B-4306-9A11-CAB121C46136}"
 EndProject
