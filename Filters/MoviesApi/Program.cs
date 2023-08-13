@@ -30,9 +30,10 @@ app.UseAuthorization();
 app.MapControllers();
 
 
-
+/*
 app.Use(async (context, next) =>
 {
+    context.
     await context.Response.WriteAsync("Request llegando al primer componente \n");
     await next();
     await context.Response.WriteAsync("Request saliendo del primer componente \n");
@@ -49,5 +50,6 @@ app.Run(async (context) =>
 {
     await context.Response.WriteAsync("Fin del pipeline \n");
 });
+*/
 
 app.Run();
