@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using LogicInterface.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using MoviesApi.Filters;
 using WebModels.Models.In;
 using WebModels.Models.Out;
 
@@ -32,19 +33,15 @@ namespace MoviesApi.Controllers
         }
 
         [HttpGet("{title}")]
+        [AnnotatedCustomExceptionFilter]
         public IActionResult GetMovieByTitle([FromRoute] string title) // /Avatar
         {
-            try
-            {
-                GetMovieResponse movie = new GetMovieResponse(movieLogic.GetMovieByTitle(title));
-                return Ok(movie);
-            } catch (ArgumentException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            GetMovieResponse movie = new GetMovieResponse(movieLogic.GetMovieByTitle(title));
+            return Ok(movie);            
         }
 
         [HttpPost]
+        [AuthenticationFilter]
         public IActionResult CreateMovie([FromBody] CreateMovieRequest movie)
         {
             CreateMovieResponse response = new CreateMovieResponse(movieLogic.CreateMovie(movie.ToEntity()));

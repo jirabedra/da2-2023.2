@@ -12,7 +12,7 @@ namespace DataAccess.Repositories
     {
         public Movie GetMovieByTitle(string title)
         {
-            throw new NotImplementedException();
+            throw new ArgumentException();
         }
     }
 }
