@@ -2,6 +2,7 @@
 using DataAccess.Context;
 using DataAccess.Repositories;
 using DataAccessInterface;
+using DataAccessInterface.Interfaces;
 using IDataAccess.Interfaces;
 using LogicInterface;
 using LogicInterface.Interfaces;
@@ -14,6 +15,7 @@ namespace ServiceFactory
     {
         public static void AddServices(this IServiceCollection serviceCollection)
         {
+            serviceCollection.AddScoped<IGenreRepository, GenreRepository>();
             serviceCollection.AddScoped<IMovieRepository, MovieRepository>();
             serviceCollection.AddScoped<IReviewRepository, ReviewRepository>();
             serviceCollection.AddScoped<IMovieLogic, MovieLogic>();

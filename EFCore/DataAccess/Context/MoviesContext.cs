@@ -12,7 +12,9 @@ namespace DataAccess.Context
     {
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<Genre> Genres { get; set; }
+        public virtual DbSet<Genre> Genres { get; set; }
+
+        public MoviesContext() { }
 
         public MoviesContext(DbContextOptions options) : base(options) { }
     }

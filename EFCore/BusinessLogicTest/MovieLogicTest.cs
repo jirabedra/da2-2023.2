@@ -23,7 +23,7 @@ namespace BusinessLogicTest
             string title = "Shrek 4"; //nos encantaria, pero no existe :(
             Mock<IMovieRepository> movieRepositoryMock = new Mock<IMovieRepository>(MockBehavior.Strict);
             movieRepositoryMock.Setup(repository => repository.GetMovieByTitle(It.IsAny<string>())).Throws(new ArgumentException("There is no such movie."));
-            IMovieLogic movieLogic = new MovieLogic(movieRepositoryMock.Object);
+            IMovieLogic movieLogic = new MovieLogic(movieRepositoryMock.Object, null);
             Exception exception = null;
             //Act
             try
@@ -50,7 +50,7 @@ namespace BusinessLogicTest
             string title = "Shrek 4"; //nos encantaria, pero no existe :(
             Mock<IMovieRepository> movieRepositoryMock = new Mock<IMovieRepository>(MockBehavior.Strict);
             movieRepositoryMock.Setup(repository => repository.GetMovieByTitle(It.IsAny<string>())).Throws(new ArgumentException("There is no such movie."));
-            IMovieLogic movieLogic = new MovieLogic(movieRepositoryMock.Object);
+            IMovieLogic movieLogic = new MovieLogic(movieRepositoryMock.Object, null);
             //Act, Assert is represented via an attribute 
             movieLogic.GetMovieByTitle(title);        
             movieRepositoryMock.VerifyAll();

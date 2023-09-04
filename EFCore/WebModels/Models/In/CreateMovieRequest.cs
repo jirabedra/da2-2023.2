@@ -5,14 +5,14 @@ namespace WebModels.Models.In
     public class CreateMovieRequest
     {
         public string Title { get; set; }
-        public IEnumerable<Genre> Genres { get; set; }
+        public IEnumerable<string> Genres { get; set; }
     
         public Movie ToEntity()
         {
             return new Movie()
             {
                 Title = Title,
-                Genres = Genres
+                Genres = Genres.Select(g => new Genre() { Name = g }).ToList()
             };
         }
     }

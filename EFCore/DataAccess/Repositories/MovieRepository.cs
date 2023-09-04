@@ -1,4 +1,5 @@
-﻿using DataAccessInterface;
+﻿using DataAccess.Context;
+using DataAccessInterface;
 using Domain;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,18 @@ namespace DataAccess.Repositories
 {
     public class MovieRepository : IMovieRepository
     {
+        private readonly MoviesContext _moviesContext;
+
+        public MovieRepository(MoviesContext moviesContext)
+        {
+            _moviesContext = moviesContext;
+        }
+
         public Movie GetMovieByTitle(string title)
         {
-            throw new ArgumentException();
+            return _moviesContext.Movies.First(m => m.Title == title);
         }
+
+        
     }
 }

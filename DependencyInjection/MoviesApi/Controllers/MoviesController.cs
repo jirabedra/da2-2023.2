@@ -11,7 +11,7 @@ namespace MoviesApi.Controllers
     [ApiController]
     public class MoviesController : ControllerBase
     {
-        private IMovieLogic movieLogic;
+        private readonly IMovieLogic movieLogic;
         public MoviesController(IMovieLogic movieLogic)
         {
             this.movieLogic = movieLogic;
