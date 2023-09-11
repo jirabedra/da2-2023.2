@@ -11,5 +11,6 @@ namespace DataAccessInterface.Interfaces
     {
         public Genre GetGenre(string title);
         public Genre CreateGenre(Genre genre);
+        public IEnumerable<Genre> GetAllGenres();
     }
 }

@@ -29,6 +29,11 @@ namespace DataAccess.Repositories
             throw new ArgumentException($"Genre {genre.Name} already exists.");
         }
 
+        public IEnumerable<Genre> GetAllGenres()
+        {
+            return _moviesContext.Genres;
+        }
+
         public Genre GetGenre(string title)
         {
             throw new NotImplementedException();
